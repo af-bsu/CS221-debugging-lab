@@ -53,11 +53,11 @@ public class ArraySet<T> implements SimpleSet<T> {
 	@Override
 	public void add(T element) {
 		if (!contains(element)) {
+			setArray[rear] = element;
+			rear++;
 			if (rear >= setArray.length) {
 				expandCapacity();
 			}
-			setArray[rear] = element;
-			rear++;
 		}
 	}
 
@@ -69,6 +69,9 @@ public class ArraySet<T> implements SimpleSet<T> {
 		while (retVal == null && i < rear) {
 			if (setArray[i].equals(element)) {
 				retVal = setArray[i];
+				if (rear >= setArray.length) {
+					expandCapacity();
+				}
 				//shift all following elements one space forward
 				//so there are no gaps in the array
 				while (i < rear) {

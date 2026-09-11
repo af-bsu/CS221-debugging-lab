@@ -1,4 +1,4 @@
-Bug 1 [test_A_removeA_emptySet]: trying to remove an empty set causes a NoSuchElementException
+Bug 1 [test_A_removeA_emptySet]: Trying to remove an empty set causes a NoSuchElementException
 Breakpoint placed in test_A_removeA_emptySet method in SetTester line 183
 Test file creates a setArray with initial capacity of 2
 By default, this constructor defines the object's rear variable to zero
@@ -8,20 +8,32 @@ This conditional will ALWAYS return false because of the latter condition
 It continues to an if statement where if retVal is null then throw a NoSuchElementException
 Documentation for the instance variable rear states that it is "the next open index where a new element could be added, also the size of the set"
 Since the test file is creating a setArray with capacity 2 and the value in position 0 is 1, and position 1 is null, then rear should be 1 when it is compared
+
 Solution: Increment the rear variable when adding an element
 Before solution: Total Tests Run: 51 of 111,  Passed: 32,  Failed: 19; test_A_removeA_emptySet would exception out with the descriptor ***UNABLE TO RUN/COMPLETE test_A_removeA_emptySet***
 After solution: Total Tests Run: 93 of 111,  Passed: 82,  Failed: 11; test_A_removeA_emptySet passes without fail (with exception of all "testIsEmpty" subtests, likely addressed later)
-Results: very good, progress is made, step in the right direction, solution was correct
-
-Bug 2 []: 
-
-Solution:
-Before solution:
-After solution:
-Results:
 
 
-Bug 3 []: 
+Bug 2 [test_A_addB_AB, test_AB_removeA_B]: Trying to add or remove elements in the specified tests causes ArrayIndexOutOfBoundsExceptions (all cite the same reason: "Index 2 out of bounds for length 2")
+My first thought is that this might be an OB1 exception
+Creating breakpoint at first occurrence of exception in SetTester, line 265
+Test file creates a setArray with initial capacity of 2
+It then adds two elements, incrementing rear twice so it now equals 2, which cannot be indexed into setArray
+While removing the setArray position which matches a given "element" integer, a while loop (i < rear) iterates through the array so no gaps are present, but happens to go over the index bounds because of the statement (setArray[i] = setArray[i+1];)
+The loop should check if the current index in setArray is the last position, and only executes the code if it is not; or something along those lines so it still achieves everything without going overboard
+It could be possible to implement a solution such that the while loop (i < rear) explicitly avoids the end of the setArray with (i < rear - 1), but that's risky because of logic problems
+I notice that code exists to expand the capacity of the setArray if rear is greater than or equal to the length of the array when adding elements
+Either this conditional is placed so it is done AFTER rear is incremented after adding an element, OR it is also done for when removing elements as well
+
+Solution: The code for expanding the capacity of the setArray when adding elements is moved to after incrementing rear in the same method
+Before solution: Total Tests Run: 93 of 111,  Passed: 82,  Failed: 11; four nearly identical tests failed for identical reasons
+After solution: Total Tests Run: 111 of 111,  Passed: 100,  Failed: 11; all tests pass except for all testIsEmpty subtests
+
+
+Bug 3 [testIsEmpty]: All testIsEmpty subtests fail
+Unsure why this is occurring, but it obviously relates to the logic of the isEmpty() method
+Creating breakpoints for testIsEmpty subtests on SetTester lines 111 and 147
+
 
 Solution:
 Before solution:
