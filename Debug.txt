@@ -1,7 +1,29 @@
-Bug 1: 
+Bug 1 [test_A_removeA_emptySet]: trying to remove an empty set causes a NoSuchElementException
+Breakpoint placed in test_A_removeA_emptySet method in SetTester line 183
+Test file creates a setArray with initial capacity of 2
+By default, this constructor defines the object's rear variable to zero
+While removing an element, it defines a variable retVal and assigns null
+The remove sequence asks that retVal be null and i (for the while loop) is less than rear
+This conditional will ALWAYS return false because of the latter condition
+It continues to an if statement where if retVal is null then throw a NoSuchElementException
+Documentation for the instance variable rear states that it is "the next open index where a new element could be added, also the size of the set"
+Since the test file is creating a setArray with capacity 2 and the value in position 0 is 1, and position 1 is null, then rear should be 1 when it is compared
+Solution: Increment the rear variable when adding an element
+Before solution: Total Tests Run: 51 of 111,  Passed: 32,  Failed: 19; test_A_removeA_emptySet would exception out with the descriptor ***UNABLE TO RUN/COMPLETE test_A_removeA_emptySet***
+After solution: Total Tests Run: 93 of 111,  Passed: 82,  Failed: 11; test_A_removeA_emptySet passes without fail (with exception of all "testIsEmpty" subtests, likely addressed later)
+Results: very good, progress is made, step in the right direction, solution was correct
+
+Bug 2 []: 
+
+Solution:
+Before solution:
+After solution:
+Results:
 
 
-Bug 2: 
+Bug 3 []: 
 
-
-Bug 3: 
+Solution:
+Before solution:
+After solution:
+Results:

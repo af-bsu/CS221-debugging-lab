@@ -57,6 +57,7 @@ public class ArraySet<T> implements SimpleSet<T> {
 				expandCapacity();
 			}
 			setArray[rear] = element;
+			rear++;
 		}
 	}
 
