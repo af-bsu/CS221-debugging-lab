@@ -33,9 +33,9 @@ After solution: Total Tests Run: 111 of 111,  Passed: 100,  Failed: 11; all test
 Bug 3 [testIsEmpty]: All testIsEmpty subtests fail
 Unsure why this is occurring, but it obviously relates to the logic of the isEmpty() method
 Creating breakpoints for testIsEmpty subtests on SetTester lines 111 and 147
+Ah... if the setArray is actually empty then rear should read 0, but the logic returns true if it is greater than 0. That's scarily simple for a bug lol ...
 
+Solution: Change the logic of the isEmpty() method to actually reflect an empty setArray
+Before solution: Total Tests Run: 111 of 111,  Passed: 100,  Failed: 11; all testIsEmpty subtests failed
+After solution: Total Tests Run: 111 of 111,  Passed: 111,  Failed: 0; all testIsEmpty subtests pass
 
-Solution:
-Before solution:
-After solution:
-Results:
